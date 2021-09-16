@@ -1,29 +1,42 @@
 <!DOCTYPE html>
-<html style="width:50%;height:50%;">
-    <head>
-      <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-      <meta id="viewport" name="viewport" content ="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-      <title>Visor GeoEuskadi</title>
-       
-        <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="https://www.geo.euskadi.eus/bisorea/v3/css/GeoeuskadiLoadingSplash_c.css" />
-         
-        <!--  CORE -->
-        <script type="text/javascript" src="https://www.geo.euskadi.eus/bisorea/v3/js/main-compiled.js"></script>
-        <!-- Variables globales de la aplicacion -->
-        <script type="text/javascript" src="https://www.geo.euskadi.eus/bisorea/v3/js/imports_lite.js"></script>
-         
-        <!-- Script de inicializacion -->
-        <script type="text/javascript" >
-            // Funcion de arranque de la aplicacion
-            function loadApp(){
-                mapDiv = "mi_mapa";
-                new Parser_c();
-            }
-       </script> 
-        
-    </head>
-    <body style="width:70%;height:70%; margin: 0; padding: 0;" onload="loadApp();">
-        <div id="mi_mapa" style="width: 100%; height: 100%; position:relative;"></div>
-    </body>
+<html>
+  <head>
+    <meta http-equiv='Content-Type' content='text/html;charset=ISO-8859-1'/>
+    <title>Visor GeoEuskadi - Demo integración</title>
+      <!-- CSS -->
+      <link rel='stylesheet' type='text/css' href='http://www.geo.euskadi.net/bisorea/v3/css/GeoeuskadiLoadingSplash_c.css'/>
+      <!--  CORE -->
+      <script type='text/javascript' src='http://www.geo.euskadi.net/bisorea/v3/js/main-compiled.js'></script>
+       <!-- Variables globales de la aplicación -->
+      <script type='text/javascript' src='http://www.geo.euskadi.net/bisorea/v3/js/imports_lite.js'></script> 
+      <!-- Script de inicialización -->
+      <script type='text/javascript'> 
+        // Parametros de entrada a la aplicación 
+        var langApp = 'ES'; 
+        mapDiv = 'myMap'; 
+        // Función de arranque de la aplicación
+         function loadApp(){ 
+           new Parser_c(); 
+           COREProxy.register({ 
+             onAppLoaded: function(){
+               COREProxy.api.plugins.enableOne(COREProxy.api.plugins.SELECTOR_CAPA_BASE);
+               COREProxy.api.plugins.enableOne(COREProxy.api.plugins.PANTALLA_COMPLETA);
+               COREProxy.api.interactions.zoomToExtent([558927.822,4792503.701,564435.704,4795530.251]);
+               COREProxy.api.layers.setBaseLayer('Ortofoto-cartografia');
+               COREProxy.api.layers.addWFSLayer('POIS_ayuntamientos','http://www.geo.euskadi.net/geoeuskadi/services/U11/WFS_POIs/MapServer/WFSServer','{"extra_attributes":{"featureprefix":"U11_WFS_POIs","featuretype":"Ayuntamientos_localizaciones","featurenamespace":"U11_WFS_POIs","geometryname":"SHAPE","strategies":"CLUSTER","infoTooltipES":"[NOMBRE]","infoTooltipEU":"[NOMBRE]","infoClusterTooltipES":"# Ayuntamientos","infoClusterTooltipEU":"# Udalak","sldJson":"$GEO_EUSKADI$/bisorea/v3/sld/ayuntamientos.js"}}');
+               COREProxy.api.layers.addWFSLayer('POIS_instalaciones-deportivas','http://www.geo.euskadi.net/geoeuskadi/services/U11/WFS_POIs/MapServer/WFSServer','{"extra_attributes":{"opendata":"$LANG_ES$=http://www.geo.euskadi.eus/geograficos/datos-espaciales-de-las-instalaciones-deportivas-de-la-capv/s69-geodir/es/$LANG_EU$=http://www.geo.euskadi.eus/geografikoak/eaeko-kirol-instalazioen-datu-espazialak/s69-geodir/eu/","featureprefix":"U11_WFS_POIs","featuretype":"Instalaciones_Deportivas","featurenamespace":"U11_WFS_POIs","geometryname":"SHAPE","strategies":"CLUSTER","infoTooltipES":"[NOMBRE]","infoTooltipEU":"[NOMBRE]","infoClusterTooltipES":"# Instalaciones deportivas","infoClusterTooltipEU":"# Kirol-instalazioak","sldJson":"$GEO_EUSKADI$/bisorea/v3/sld/instalaciones_deportivas.js"}}');
+               COREProxy.api.layers.addWFSLayer('POIS_KZguneak','http://www.geo.euskadi.net/geoeuskadi/services/U11/WFS_POIs/MapServer/WFSServer','{"extra_attributes":{"opendata":"$LANG_ES$=http://www.geo.euskadi.eus/geograficos/red-de-centros-kzgunea/s69-geodir/es/$LANG_EU$=http://www.geo.euskadi.eus/geografikoak/kzgunea-zentru-sarea/s69-geodir/eu/","featureprefix":"U11_WFS_POIs","featuretype":"KZ_Guneak","featurenamespace":"U11_WFS_POIs","geometryname":"SHAPE","strategies":"CLUSTER","infoTooltipES":"[CENTRO]","infoTooltipEU":"[CENTRO]","infoClusterTooltipES":"# KZgunea","infoClusterTooltipEU":"# KZgunea","sldJson":"$GEO_EUSKADI$/bisorea/v3/sld/kz_gunea.js"}}');
+               COREProxy.api.layers.addWFSLayer('POIS_Garbigunes','http://www.geo.euskadi.net/geoeuskadi/services/U11/WFS_POIs/MapServer/WFSServer','{"extra_attributes":{"featureprefix":"U11_WFS_POIs","featuretype":"Garbigunes","featurenamespace":"U11_WFS_POIs","geometryname":"SHAPE","strategies":"CLUSTER","infoTooltipES":"[GARBIGUNE]","infoTooltipEU":"[GARBIGUNE]","infoClusterTooltipES":"# Garbigunes","infoClusterTooltipEU":"# Garbiguneak","sldJson":"$GEO_EUSKADI$/bisorea/v3/sld/garbigune.js"}}');
+               COREProxy.api.layers.addWFSLayer('POIS_Lanbide','http://www.geo.euskadi.net/geoeuskadi/services/U11/WFS_POIs/MapServer/WFSServer','{"extra_attributes":{"featureprefix":"U11_WFS_POIs","featuretype":"Oficinas_Lanbide","featurenamespace":"U11_WFS_POIs","geometryname":"SHAPE","strategies":"FIXED","infoTooltipES":"[OFICINA]","infoTooltipEU":"[OFICINA]","sldJson":"$GEO_EUSKADI$/bisorea/v3/sld/lanbide.js"}}');
+               COREProxy.api.layers.addWFSLayer('kml_educacion','http://www.geo.euskadi.net/geoeuskadi/services/U11/WFS_POIs/MapServer/WFSServer','{"extra_attributes":{"opendata":"$LANG_ES$=http://www.geo.euskadi.eus/s69-geodir/es/contenidos/ds_geograficos/md_ideeu_centros_docentes/es_def/index.shtml$LANG_EU$=http://www.geo.euskadi.eus/s69-geodir/es/contenidos/ds_geograficos/md_ideeu_centros_docentes/eu_def/index.shtml","featureprefix":"U11_WFS_POIs","featuretype":"Centros_Educativos","featurenamespace":"U11_WFS_POIs","geometryname":"SHAPE","strategies":"CLUSTER","infoTooltipES":"[IZENA_NOMB]","infoTooltipEU":"[IZENA_NOMB]","infoClusterTooltipES":"# Centros educativos","infoClusterTooltipEU":"# Hezkuntza zentroak","sldJson":"$GEO_EUSKADI$/bisorea/v3/sld/educacion.js"}}');
+               COREProxy.api.layers.addWFSLayer('POIS_edificios_judiciales','http://www.geo.euskadi.net/geoeuskadi/services/U11/WFS_POIs/MapServer/WFSServer','{"extra_attributes":{"featureprefix":"U11_WFS_POIs","featuretype":"Edificios_Judiciales","featurenamespace":"U11_WFS_POIs","geometryname":"SHAPE","strategies":"CLUSTER","infoTooltipES":"[NOMBRE]","infoTooltipEU":"[NOMBRE]","infoClusterTooltipES":"# Servicios judiciales","infoClusterTooltipEU":"# Epaitegi zerbitzuak","sldJson":"$GEO_EUSKADI$/bisorea/v3/sld/edificios_judiciales.js"}}');
+               
+             } 
+           }); 
+        } 
+       </script>
+  </head>
+  <body style='background-color: #CCCCCC;font-family: Arial;' onload='loadApp();'>
+    <div id='myMap' style='position:relative;margin:20px auto;width:90%;height:600px;background-color:#F5F5F5;'></div>
+  </body>
 </html>
