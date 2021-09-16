@@ -1,50 +1,45 @@
-
-
 <!DOCTYPE html>
 <html style="width:100%;height:100%;">
     <head>
       <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
       <meta id="viewport" name="viewport" content ="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        
       <title>GeoEuskadi edo</title>
-       
+          
         <!-- CSS -->
         <link rel="stylesheet" type="text/css" href="https://www.geo.euskadi.eus/bisorea/v3/css/GeoeuskadiLoadingSplash_c.css" />
-         
+          
         <!--  CORE -->
         <script type="text/javascript" src="https://www.geo.euskadi.eus/bisorea/v3/js/main-compiled.js"></script>
+          
         <!-- Variables globales de la aplicacion -->
-        <script type="text/javascript" src="https://www.geo.euskadi.eus/bisorea/v3/js/imports_lite.js"></script>
-         
+        <script type="text/javascript" src="https://www.geo.euskadi.eus/bisorea/v3/js/imports_lite.js"></script>  
+          
         <!-- Script de inicializacion -->
         <script type="text/javascript" >
             // Funcion de arranque de la aplicacion
             function loadApp(){
                 mapDiv = "mi_mapa";
                 new Parser_c();
-              COREProxy.register({
+                //Nos registramos al evento de que se ha cargado la aplicacion
+                COREProxy.register({
                     onAppLoaded: function(){
                         //Todo lo que está dentro de esta función se va a ejecutar una vez que el visor ha sido cargado.
                         //Por ejemplo: la carga de capas, cambiar las capas base, mostrar u ocultar plugins, dibujar puntos en el mapa, ...
  
-                        //Cambiamos la capa base por la capa base de cartografía
-                        COREProxy.api.layers.setBaseLayer( COREProxy.api.baseLayers.ORTOFOTO_CARTOGRAFIA );
-              
-          
-              
-              
+                        //Añadimos el WMS
+                        COREProxy.api.layers.addWMSLayer("Capa de ejemplo WMS", "COR_ECO_TRANSVERSAL_TENSION,COR_ECO_TENSION_CARRETERA,COR_ECO_AREAS_CRITICAS,COR_ECO_MEDIDAS_ACTUACION,COR_ECO_RESTAURACION_ECO,COR_ECO_NUCLEOS_CONECTAR,COR_ECO_AREAS_ENLACE,COR_ECO_CORREDOR_ENLACE,COR_ECO_AMORTIGUACION,COR_ECO_TRAMO_FLUVIAL", "https://www.geo.euskadi.eus/geoeuskadi/services/S91B/WMS_INGURUMENA/MapServer/WMSServer");
+                    }
+                });
             }
        </script>
-        
+          
     </head>
+ 
     <body style="width:100%;height:100%; margin: 0; padding: 0;" onload="loadApp();">
         <div id="mi_mapa" style="width: 100%; height: 100%; position:relative;"></div>
     </body>
 </html>
-
-
-
-
-
 
 
 
