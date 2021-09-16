@@ -21,12 +21,18 @@
             function loadApp(){
                 mapDiv = "mi_mapa";
                 new Parser_c();
-              
+              COREProxy.register({
+                    onAppLoaded: function(){
+                        //Todo lo que está dentro de esta función se va a ejecutar una vez que el visor ha sido cargado.
+                        //Por ejemplo: la carga de capas, cambiar las capas base, mostrar u ocultar plugins, dibujar puntos en el mapa, ...
+ 
+                        //Cambiamos la capa base por la capa base de cartografía
+                        COREProxy.api.layers.setBaseLayer( COREProxy.api.baseLayers.ORTOFOTO_CARTOGRAFIA );
               COREProxy.api.interactions.zoomToExtent({
- xmin: "505748.711263335",
- ymin: "4789865.45941155",
- xmax: "507744.3350462495",
- ymax: "4790561.844137645"
+ xmin: "558927.822263335",
+ ymin: "4792503.70141155",
+ xmax: "562252.2290462495",
+ ymax: "4795643.440137645"
 });
               
               
